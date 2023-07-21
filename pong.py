@@ -133,4 +133,4 @@ while True:
             pygame.quit()
             sys.exit()
     pygame.display.update()
-    fps.tick(120)
+    fps.tick(60)
