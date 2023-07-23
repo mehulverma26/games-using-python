@@ -38,49 +38,66 @@ def close():
 def show_spinner(angle, color, dark_color):
     d = 80
     innerd = 50
-    x = width/2 - d/2
-    y = height/2
+    x = width / 2 - d / 2
+    y = height / 2
     l = 200
-    r = l/(3**0.5)
+    r = l / (3**0.5)
     w = 10
     lw = 60
 
     # A little math for calculation the coordinates after rotation by some 'angle'
     # x = originx + r*cos(angle)
     # y = originy + r*sin(angle)
-    
+
     centre = [x, y, d, d]
-    centre_inner = [x + d/2 - innerd/2, y + d/2 - innerd/2, innerd, innerd]
-    
-    top = [x, y - l/(3)**0.5, d, d]
-    top_inner = [x, y - l/(3)**0.5, innerd, innerd]
+    centre_inner = [x + d / 2 - innerd / 2, y + d / 2 - innerd / 2, innerd, innerd]
 
-    top[0] = x + r*cos(radians(angle))
-    top[1] = y + r*sin(radians(angle))
-    top_inner[0] = x + d/2 - innerd/2 + r*cos(radians(angle))
-    top_inner[1] = y + d/2 - innerd/2 + r*sin(radians(angle))
-    
-    left = [x - l/2, y + l/(2*(3)**0.5), d, d]
-    left_inner = [x, y - l/(3)**0.5, innerd, innerd]
+    top = [x, y - l / (3) ** 0.5, d, d]
+    top_inner = [x, y - l / (3) ** 0.5, innerd, innerd]
 
-    left[0] = x + r*cos(radians(angle - 120))
-    left[1] = y + r*sin(radians(angle - 120))
-    left_inner[0] = x + d/2 - innerd/2 + r*cos(radians(angle - 120))
-    left_inner[1] = y + d/2 - innerd/2 + r*sin(radians(angle - 120))
-    
-    
-    right = [x + l/2, y + l/(2*(3)**0.5), d, d]
-    right_inner = [x, y - l/(3)**0.5, innerd, innerd]
+    top[0] = x + r * cos(radians(angle))
+    top[1] = y + r * sin(radians(angle))
+    top_inner[0] = x + d / 2 - innerd / 2 + r * cos(radians(angle))
+    top_inner[1] = y + d / 2 - innerd / 2 + r * sin(radians(angle))
 
-    right[0] = x + r*cos(radians(angle + 120))
-    right[1] = y + r*sin(radians(angle + 120))
-    right_inner[0] = x + d/2 - innerd/2 + r*cos(radians(angle + 120))
-    right_inner[1] = y + d/2 - innerd/2 + r*sin(radians(angle + 120))
-    
+    left = [x - l / 2, y + l / (2 * (3) ** 0.5), d, d]
+    left_inner = [x, y - l / (3) ** 0.5, innerd, innerd]
+
+    left[0] = x + r * cos(radians(angle - 120))
+    left[1] = y + r * sin(radians(angle - 120))
+    left_inner[0] = x + d / 2 - innerd / 2 + r * cos(radians(angle - 120))
+    left_inner[1] = y + d / 2 - innerd / 2 + r * sin(radians(angle - 120))
+
+    right = [x + l / 2, y + l / (2 * (3) ** 0.5), d, d]
+    right_inner = [x, y - l / (3) ** 0.5, innerd, innerd]
+
+    right[0] = x + r * cos(radians(angle + 120))
+    right[1] = y + r * sin(radians(angle + 120))
+    right_inner[0] = x + d / 2 - innerd / 2 + r * cos(radians(angle + 120))
+    right_inner[1] = y + d / 2 - innerd / 2 + r * sin(radians(angle + 120))
+
     # Drawing shapes on Pygame Window
-    pygame.draw.line(display, dark_color, (top[0] + d/2, top[1] + d/2), (centre[0] + d/2, centre[1] + d/2), lw)
-    pygame.draw.line(display, dark_color, (left[0] + d/2, left[1] + d/2), (centre[0] + d/2, centre[1] + d/2), lw)
-    pygame.draw.line(display, dark_color, (right[0] + d/2, right[1] + d/2), (centre[0] + d/2, centre[1] + d/2), lw)
+    pygame.draw.line(
+        display,
+        dark_color,
+        (top[0] + d / 2, top[1] + d / 2),
+        (centre[0] + d / 2, centre[1] + d / 2),
+        lw,
+    )
+    pygame.draw.line(
+        display,
+        dark_color,
+        (left[0] + d / 2, left[1] + d / 2),
+        (centre[0] + d / 2, centre[1] + d / 2),
+        lw,
+    )
+    pygame.draw.line(
+        display,
+        dark_color,
+        (right[0] + d / 2, right[1] + d / 2),
+        (centre[0] + d / 2, centre[1] + d / 2),
+        lw,
+    )
     pygame.draw.ellipse(display, color, tuple(centre))
     pygame.draw.ellipse(display, dark_color, tuple(centre_inner))
     pygame.draw.ellipse(display, color, tuple(top))
@@ -89,7 +106,7 @@ def show_spinner(angle, color, dark_color):
     pygame.draw.ellipse(display, dark_gray, tuple(left_inner), 10)
     pygame.draw.ellipse(display, color, tuple(right))
     pygame.draw.ellipse(display, dark_gray, tuple(right_inner), 10)
-    
+
 
 # Displaying Information on Pygame Window
 def show_info(friction, speed):
@@ -112,9 +129,15 @@ def spinner():
     leftPressed = False
 
     direction = 1
-    color = [[red, dark_red], [blue, dark_blue], [yellow, dark_yellow], [green, dark_green], [orange, dark_orange]]
+    color = [
+        [red, dark_red],
+        [blue, dark_blue],
+        [yellow, dark_yellow],
+        [green, dark_green],
+        [orange, dark_orange],
+    ]
     index = 0
-    
+
     while spin:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -151,16 +174,17 @@ def spinner():
                 speed += friction
                 if speed > 0:
                     speed = 0.0
-                    
+
         display.fill(background)
-        
+
         angle += speed
 
         # Displaying Information and the Fidget Spinner
         show_spinner(angle, color[index][0], color[index][1])
         show_info(friction, speed)
-        
+
         pygame.display.update()
         clock.tick(144)
+
 
 spinner()

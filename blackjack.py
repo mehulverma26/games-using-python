@@ -1,4 +1,6 @@
 import random
+
+
 class Card:
     def __init__(self, suit, value):
         self.suit = suit
@@ -10,8 +12,11 @@ class Card:
 
 class Deck:
     def __init__(self):
-        self.cards = [Card(s, v) for s in ["Spades", "Clubs", "Hearts", "Diamonds"] for v in
-                      ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]]
+        self.cards = [
+            Card(s, v)
+            for s in ["Spades", "Clubs", "Hearts", "Diamonds"]
+            for v in ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+        ]
 
     def shuffle(self):
         if len(self.cards) > 1:
@@ -67,7 +72,7 @@ class Game:
 
     def play(self):
         playing = True
-        
+
         while playing:
             self.deck = Deck()
             self.deck.shuffle()
@@ -91,13 +96,15 @@ class Game:
                 player_has_blackjack, dealer_has_blackjack = self.check_for_blackjack()
                 if player_has_blackjack or dealer_has_blackjack:
                     game_over = True
-                    self.show_blackjack_results(player_has_blackjack, dealer_has_blackjack)
+                    self.show_blackjack_results(
+                        player_has_blackjack, dealer_has_blackjack
+                    )
                     continue
 
                 choice = input("Please choose [Hit / Stick] ").lower()
                 while choice not in ["h", "s", "hit", "stick"]:
                     choice = input("Please enter 'hit' or 'stick' (or H/S) ").lower()
-                if choice in ['hit', 'h']:
+                if choice in ["hit", "h"]:
                     self.player_hand.add_card(self.deck.deal())
                     self.player_hand.display()
                     if self.player_is_over():
@@ -118,7 +125,7 @@ class Game:
                     else:
                         print("Dealer Wins!")
                     game_over = True
-            
+
             again = input("Play Again? [Y/N] ")
             while again.lower() not in ["y", "n"]:
                 again = input("Please enter Y or N ")
